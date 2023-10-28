@@ -1,0 +1,690 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>Pr&aacute;ctica 6: Convoluci&oacute;n y Correlaci&oacute;n de se&ntilde;ales</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2023-10-27">
+<meta name="DC.source" content="P06ASyS2023.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>Pr&aacute;ctica 6: Convoluci&oacute;n y Correlaci&oacute;n de se&ntilde;ales</h1>
+<!--introduction-->
+<div>
+<ul>
+<li>Lopez Solano Irvin</li>
+<li>Moreno Castro Jose Pablo</li>
+<li>Pedraza Ocampo Eduardo</li>
+<li>Portillo Martinez Carolina</li>
+<li>Reyes Alvarez Angel</li>
+</ul>
+</div>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">INTRODUCCION</a>
+</li>
+<li>
+<a href="#8">Punto3</a>
+</li>
+<li>
+<a href="#9">Punto 4</a>
+</li>
+<li>
+<a href="#10">Punto 5</a>
+</li>
+</ul>
+</div>
+<h2 id="1">INTRODUCCION</h2>
+<p>
+<b>Teorema Fundamental del C&aacute;lculo</b>
+</p>
+<pre class="codeinput">f = @(x) sin(x); <span class="comment">% Funci&oacute;n a integrar</span>
+a = 0; <span class="comment">% L&iacute;mite inferior de integraci&oacute;n</span>
+b = pi; <span class="comment">% L&iacute;mite superior de integraci&oacute;n</span>
+integralValue = integral(f, a, b); <span class="comment">% C&aacute;lculo de la integral</span>
+disp(<span class="string">'Teorema Fundamental del C&aacute;lculo:'</span>);
+disp(<span class="string">'El Teorema Fundamental del C&aacute;lculo establece la relaci&oacute;n entre la diferenciaci&oacute;n y la integraci&oacute;n.'</span>);
+disp([<span class="string">'El valor de la integral de sin(x) de 0 a pi es: '</span>, num2str(integralValue)]);
+
+x = linspace(a, b, 1000); <span class="comment">% Puntos para graficar</span>
+y = f(x);
+figure;
+plot(x, y, <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 1.5);
+title(<span class="string">'Funci&oacute;n a Integrar: sin(x)'</span>);
+xlabel(<span class="string">'x'</span>);
+ylabel(<span class="string">'f(x)'</span>);
+grid <span class="string">on</span>;
+set(gca, <span class="string">'FontSize'</span>, 10);
+set(gca, <span class="string">'FontName'</span>, <span class="string">'Arial'</span>);
+legend(<span class="string">'sin(x)'</span>, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+pause(1); <span class="comment">% Pausa para mostrar el gr&aacute;fico</span>
+</pre>
+<pre class="codeoutput">Teorema Fundamental del C&aacute;lculo:
+El Teorema Fundamental del C&aacute;lculo establece la relaci&oacute;n entre la diferenciaci&oacute;n y la integraci&oacute;n.
+El valor de la integral de sin(x) de 0 a pi es: 2
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_01.png" alt=""> <p>
+<b>Regla del Trapecio de Newton-Cotes</b>
+</p>
+<pre class="codeinput">f = @(x) sin(x); <span class="comment">% Funci&oacute;n a integrar</span>
+a = 0; <span class="comment">% L&iacute;mite inferior</span>
+b = pi; <span class="comment">% L&iacute;mite superior</span>
+n = 50; <span class="comment">% N&uacute;mero de subintervalos</span>
+x = linspace(a, b, n+1); <span class="comment">% Puntos donde se evaluar&aacute; la funci&oacute;n</span>
+h = (b - a) / n; <span class="comment">% Ancho de cada subintervalo</span>
+integralValue = h * (sum(f(x)) - (f(a) + f(b)) / 2); <span class="comment">% F&oacute;rmula del trapecio</span>
+disp(<span class="string">'Regla del Trapecio:'</span>);
+disp(<span class="string">'La regla del trapecio divide el &aacute;rea bajo la curva en trapecios y lo estima como la suma de &aacute;reas de estos trapecios.'</span>);
+disp([<span class="string">'El valor de la integral de sin(x) de 0 a pi es: '</span>, num2str(integralValue)]);
+
+figure;
+plot(x, f(x), <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 1.5);
+hold <span class="string">on</span>;
+area(x, f(x), <span class="string">'FaceColor'</span>, [1 0 0], <span class="string">'FaceAlpha'</span>, 0.3);
+title(<span class="string">'Regla del Trapecio para sin(x)'</span>);
+xlabel(<span class="string">'x'</span>);
+ylabel(<span class="string">'f(x)'</span>);
+grid <span class="string">on</span>;
+set(gca, <span class="string">'FontSize'</span>, 10);
+set(gca, <span class="string">'FontName'</span>, <span class="string">'Arial'</span>);
+legend(<span class="string">'sin(x)'</span>, <span class="string">'&Aacute;rea bajo la curva'</span>, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+hold <span class="string">off</span>;
+pause(1); <span class="comment">% Pausa para mostrar el gr&aacute;fico</span>
+</pre>
+<pre class="codeoutput">Regla del Trapecio:
+La regla del trapecio divide el &aacute;rea bajo la curva en trapecios y lo estima como la suma de &aacute;reas de estos trapecios.
+El valor de la integral de sin(x) de 0 a pi es: 1.9993
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_02.png" alt=""> <p>
+<b>Regla de Simpson de Newton-Cotes</b>
+</p>
+<pre class="codeinput">f = @(x) sin(x); <span class="comment">% Funci&oacute;n a integrar</span>
+a = 0; <span class="comment">% L&iacute;mite inferior</span>
+b = pi; <span class="comment">% L&iacute;mite superior</span>
+n = 50; <span class="comment">% N&uacute;mero de subintervalos (debe ser par)</span>
+x = linspace(a, b, n+1); <span class="comment">% Puntos donde se evaluar&aacute; la funci&oacute;n</span>
+h = (b - a) / n; <span class="comment">% Ancho de cada subintervalo</span>
+integralValue = h/3 * (f(a) + 4*sum(f(x(2:2:end-1))) + 2*sum(f(x(3:2:end-2))) + f(b)); <span class="comment">% F&oacute;rmula de Simpson</span>
+disp(<span class="string">'Regla de Simpson:'</span>);
+disp(<span class="string">'La regla de Simpson utiliza polinomios de segundo orden para aproximar la funci&oacute;n y calcular el &aacute;rea bajo la curva.'</span>);
+disp([<span class="string">'El valor de la integral de sin(x) de 0 a pi es: '</span>, num2str(integralValue)]);
+
+figure;
+plot(x, f(x), <span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 1.5);
+hold <span class="string">on</span>;
+area(x, f(x), <span class="string">'FaceColor'</span>, [0 1 0], <span class="string">'FaceAlpha'</span>, 0.3);
+title(<span class="string">'Regla de Simpson para sin(x)'</span>);
+xlabel(<span class="string">'x'</span>);
+ylabel(<span class="string">'f(x)'</span>);
+grid <span class="string">on</span>;
+set(gca, <span class="string">'FontSize'</span>, 10);
+set(gca, <span class="string">'FontName'</span>, <span class="string">'Arial'</span>);
+legend(<span class="string">'sin(x)'</span>, <span class="string">'&Aacute;rea bajo la curva'</span>, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+hold <span class="string">off</span>;
+pause(1); <span class="comment">% Pausa para mostrar el gr&aacute;fico</span>
+</pre>
+<pre class="codeoutput">Regla de Simpson:
+La regla de Simpson utiliza polinomios de segundo orden para aproximar la funci&oacute;n y calcular el &aacute;rea bajo la curva.
+El valor de la integral de sin(x) de 0 a pi es: 2
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_03.png" alt=""> <p>
+<b>Regla del Trapecio Compuesto</b>
+</p>
+<pre class="codeinput">f = @(x) cos(x); <span class="comment">% Funci&oacute;n a integrar</span>
+a = 0; <span class="comment">% L&iacute;mite inferior</span>
+b = 2*pi; <span class="comment">% L&iacute;mite superior</span>
+n = 100; <span class="comment">% N&uacute;mero de subintervalos</span>
+x = linspace(a, b, n+1); <span class="comment">% Puntos donde se evaluar&aacute; la funci&oacute;n</span>
+h = (b - a) / n; <span class="comment">% Ancho de cada subintervalo</span>
+integralValue = h/2 * (f(a) + 2*sum(f(x(2:end-1))) + f(b)); <span class="comment">% F&oacute;rmula del trapecio compuesto</span>
+disp(<span class="string">'Trapecio Compuesto:'</span>);
+disp(<span class="string">'El trapecio compuesto divide el intervalo en m&uacute;ltiples segmentos y aplica la regla del trapecio a cada uno.'</span>);
+disp([<span class="string">'El valor de la integral de cos(x) de 0 a 2*pi es: '</span>, num2str(integralValue)]);
+
+figure;
+plot(x, f(x), <span class="string">'m'</span>, <span class="string">'LineWidth'</span>, 1.5);
+hold <span class="string">on</span>;
+area(x, f(x), <span class="string">'FaceColor'</span>, [1 0 1], <span class="string">'FaceAlpha'</span>, 0.3);
+title(<span class="string">'Trapecio Compuesto para cos(x)'</span>);
+xlabel(<span class="string">'x'</span>);
+ylabel(<span class="string">'f(x)'</span>);
+grid <span class="string">on</span>;
+set(gca, <span class="string">'FontSize'</span>, 10);
+set(gca, <span class="string">'FontName'</span>, <span class="string">'Arial'</span>);
+legend(<span class="string">'cos(x)'</span>, <span class="string">'&Aacute;rea bajo la curva'</span>, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+hold <span class="string">off</span>;
+pause(1); <span class="comment">% Pausa para mostrar el gr&aacute;fico</span>
+</pre>
+<pre class="codeoutput">Trapecio Compuesto:
+El trapecio compuesto divide el intervalo en m&uacute;ltiples segmentos y aplica la regla del trapecio a cada uno.
+El valor de la integral de cos(x) de 0 a 2*pi es: -1.6742e-16
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_04.png" alt=""> <p>
+<b>Regla de Simpson Compuesta</b>
+</p>
+<pre class="codeinput">f = @(x) cos(x); <span class="comment">% Funci&oacute;n a integrar</span>
+a = 0; <span class="comment">% L&iacute;mite inferior</span>
+b = 2*pi; <span class="comment">% L&iacute;mite superior</span>
+n = 100; <span class="comment">% N&uacute;mero de subintervalos (debe ser par)</span>
+x = linspace(a, b, n+1); <span class="comment">% Puntos donde se evaluar&aacute; la funci&oacute;n</span>
+h = (b - a) / n; <span class="comment">% Ancho de cada subintervalo</span>
+integralValue = h/3 * (f(a) + 4*sum(f(x(2:2:end-1))) + 2*sum(f(x(3:2:end-2))) + f(b)); <span class="comment">% F&oacute;rmula de Simpson compuesta</span>
+disp(<span class="string">'Simpson Compuesto:'</span>);
+disp(<span class="string">'El m&eacute;todo de Simpson compuesto utiliza la regla de Simpson en m&uacute;ltiples subintervalos para una mejor aproximaci&oacute;n.'</span>);
+disp([<span class="string">'El valor de la integral de cos(x) de 0 a 2*pi es: '</span>, num2str(integralValue)]);
+
+figure;
+plot(x, f(x), <span class="string">'c'</span>, <span class="string">'LineWidth'</span>, 1.5);
+hold <span class="string">on</span>;
+area(x, f(x), <span class="string">'FaceColor'</span>, [0 1 1], <span class="string">'FaceAlpha'</span>, 0.3);
+title(<span class="string">'Simpson Compuesto para cos(x)'</span>);
+xlabel(<span class="string">'x'</span>);
+ylabel(<span class="string">'f(x)'</span>);
+grid <span class="string">on</span>;
+set(gca, <span class="string">'FontSize'</span>, 10);
+set(gca, <span class="string">'FontName'</span>, <span class="string">'Arial'</span>);
+legend(<span class="string">'cos(x)'</span>, <span class="string">'&Aacute;rea bajo la curva'</span>, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+hold <span class="string">off</span>;
+pause(1); <span class="comment">% Pausa para mostrar el gr&aacute;fico</span>
+</pre>
+<pre class="codeoutput">Simpson Compuesto:
+El m&eacute;todo de Simpson compuesto utiliza la regla de Simpson en m&uacute;ltiples subintervalos para una mejor aproximaci&oacute;n.
+El valor de la integral de cos(x) de 0 a 2*pi es: -1.7672e-16
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_05.png" alt=""> <p>
+<b>Cuadratura Gaussiana</b>
+</p>
+<pre class="codeinput">f = @(x) exp(-x.^2); <span class="comment">% Funci&oacute;n a integrar</span>
+a = -1; <span class="comment">% L&iacute;mite inferior</span>
+b = 1; <span class="comment">% L&iacute;mite superior</span>
+integralValue = integral(f, a, b); <span class="comment">% C&aacute;lculo de la integral</span>
+disp(<span class="string">'Cuadratura Gaussiana:'</span>);
+disp(<span class="string">'La cuadratura gaussiana utiliza pesos y nodos espec&iacute;ficos para una aproximaci&oacute;n precisa de la integral.'</span>);
+disp([<span class="string">'El valor de la integral de exp(-x^2) de -1 a 1 es: '</span>, num2str(integralValue)]);
+
+x = linspace(a, b, 1000); <span class="comment">% Puntos para graficar</span>
+y = f(x);
+figure;
+plot(x, y, <span class="string">'k'</span>, <span class="string">'LineWidth'</span>, 1.5);
+title(<span class="string">'Funci&oacute;n a Integrar: exp(-x^2)'</span>);
+xlabel(<span class="string">'x'</span>);
+ylabel(<span class="string">'f(x)'</span>);
+grid <span class="string">on</span>;
+set(gca, <span class="string">'FontSize'</span>, 10);
+set(gca, <span class="string">'FontName'</span>, <span class="string">'Arial'</span>);
+legend(<span class="string">'exp(-x^2)'</span>, <span class="string">'Location'</span>, <span class="string">'best'</span>);
+pause(1); <span class="comment">% Pausa para mostrar el gr&aacute;fico</span>
+</pre>
+<pre class="codeoutput">Cuadratura Gaussiana:
+La cuadratura gaussiana utiliza pesos y nodos espec&iacute;ficos para una aproximaci&oacute;n precisa de la integral.
+El valor de la integral de exp(-x^2) de -1 a 1 es: 1.4936
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_06.png" alt=""> <h2 id="8">Punto3</h2>
+<pre class="codeinput">
+<span class="comment">%t = -5:0.01:5;</span>
+c = zeros(size(t));
+
+<span class="comment">% Definici&oacute;n de f(t) y p(t)</span>
+f = zeros(size(t));
+f(t &gt;= -2 &amp; t &lt;= 0) = -2 * t(t &gt;= -2 &amp; t &lt;= 0);
+f(t &gt;= 0 &amp; t &lt;= 2) = 2 * t(t &gt;= 0 &amp; t &lt;= 2);
+
+p = zeros(size(t));
+p(t &gt;= -3 &amp; t &lt;= 3) = 3 * t(t &gt;= -3 &amp; t &lt;= 3);
+
+<span class="keyword">for</span> i = 1:length(t)
+    <span class="keyword">for</span> j = 1:length(t)
+        <span class="keyword">if</span> (i + 1 - j) &gt; 0 &amp;&amp; (i + 1 - j) &lt;= length(t)
+            c(i) = c(i) + f(j) * p(i + 1 - j);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+plot(t, c);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'Convoluci&oacute;n (f * p)'</span>);
+title(<span class="string">'Convoluci&oacute;n de las se&ntilde;ales f(t) y p(t)'</span>);
+grid <span class="string">on</span>;
+<span class="comment">%</span>
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_07.png" alt=""> <h2 id="9">Punto 4</h2>
+<p>Se realiza la correlaci&oacute;n de las se&ntilde;ales (c) con (d) del problema 3.1.1 de lathi, donde la se&ntilde;al de azul es c y la de rojo es b</p>
+<pre class="codeinput">t1 = -2:2;
+x = zeros(size(t1));
+x(t1 &gt;= -2 &amp; t1 &lt;= 0) = -2 * t1(t1 &gt;= -2 &amp; t1 &lt;= 0);
+x(t1 &gt;= 0 &amp; t1 &lt;= 2) = 2 * t1(t1 &gt;= 0 &amp; t1 &lt;= 2);
+
+t2 = -3:1:3;
+p = 3 * t2;
+
+figure;
+stem(t1, x, <span class="string">'r'</span>, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'r'</span>);
+hold <span class="string">on</span>;
+stem(t2, p, <span class="string">'b'</span>, <span class="string">'filled'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'b'</span>);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'Amplitud'</span>);
+title(<span class="string">'Gr&aacute;fica de x(t) y p(t)'</span>);
+grid <span class="string">on</span>;
+legend(<span class="string">'x(t)'</span>, <span class="string">'p(t)'</span>);
+
+<span class="comment">% Solucion</span>
+t = -2:0.01:2;
+x = zeros(size(t));
+x(t &gt;= -2 &amp; t &lt;= 0) = -2 * t(t &gt;= -2 &amp; t &lt;= 0);
+x(t &gt; 0 &amp; t &lt;= 2) = 2 * t(t &gt; 0 &amp; t &lt;= 2);
+
+t = -3:0.01:3;
+p = zeros(size(t));
+p(t &gt;= -3 &amp; t &lt;= 3) = 3 * t(t &gt;= -3 &amp; t &lt;= 3);
+
+correlation = conv(x, flip(p)) * 0.01;
+
+figure;
+t_correlation = -5:0.01:5;
+t_correlation = t_correlation(1:length(correlation));
+plot(t_correlation, correlation);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'Correlaci&oacute;n (x * p)'</span>);
+title(<span class="string">'Correlaci&oacute;n entre x(t) y p(t)'</span>);
+grid <span class="string">on</span>;
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_08.png" alt=""> <img vspace="5" hspace="5" src="P06ASyS2023_09.png" alt=""> <h2 id="10">Punto 5</h2>
+<p>Se realiza la convoluci&oacute;n de las se&ntilde;ales (c) con (d) del problema 3.1.1 de lathi donde se muestra el codigo y la grafica</p>
+<pre class="codeinput">
+<span class="comment">% Solucion</span>
+<span class="comment">%</span>
+</pre>
+<pre class="language-matlab">
+<span class="comment">%% Punto 5</span>
+t = -5:0.01:5; 
+x = zeros(size(t)); 
+p = zeros(size(t)); 
+
+x(t &gt;= -2 &amp; t &lt;= 0) = -2 * t(t &gt;= -2 &amp; t &lt;= 0);
+x(t &gt;= 0 &amp; t &lt;= 2) = 2 * t(t &gt;= 0 &amp; t &lt;= 2);
+
+p(t &gt;= -3 &amp; t &lt;= 3) = 3 * t(t &gt;= -3 &amp; t &lt;= 3);
+
+convolution = conv(x, p) * 0.01; 
+
+t_convolution = -5:0.01:5;
+convolution = convolution(1:length(t_convolution));
+
+figure;
+plot(t_convolution, convolution);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'Convoluci&oacute;n (x * p)'</span>);
+title(<span class="string">'Convoluci&oacute;n de x(t) y p(t)'</span>);
+grid <span class="string">on</span>;
+
+</pre>
+<pre class="codeinput">t = -5:0.01:5;
+x = zeros(size(t));
+p = zeros(size(t));
+
+x(t &gt;= -2 &amp; t &lt;= 0) = -2 * t(t &gt;= -2 &amp; t &lt;= 0);
+x(t &gt;= 0 &amp; t &lt;= 2) = 2 * t(t &gt;= 0 &amp; t &lt;= 2);
+
+p(t &gt;= -3 &amp; t &lt;= 3) = 3 * t(t &gt;= -3 &amp; t &lt;= 3);
+
+convolution = conv(x, p) * 0.01;
+
+t_convolution = -5:0.01:5;
+convolution = convolution(1:length(t_convolution));
+
+figure;
+plot(t_convolution, convolution);
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'Convoluci&oacute;n (x * p)'</span>);
+title(<span class="string">'Convoluci&oacute;n de x(t) y p(t)'</span>);
+grid <span class="string">on</span>;
+</pre>
+<img vspace="5" hspace="5" src="P06ASyS2023_10.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Práctica 6: Convolución y Correlación de señales
+%
+% * Lopez Solano Irvin
+% * Moreno Castro Jose Pablo
+% * Pedraza Ocampo Eduardo
+% * Portillo Martinez Carolina
+% * Reyes Alvarez Angel
+%
+%% INTRODUCCION
+
+%%
+% *Teorema Fundamental del Cálculo*
+f = @(x) sin(x); % Función a integrar
+a = 0; % Límite inferior de integración
+b = pi; % Límite superior de integración
+integralValue = integral(f, a, b); % Cálculo de la integral
+disp('Teorema Fundamental del Cálculo:');
+disp('El Teorema Fundamental del Cálculo establece la relación entre la diferenciación y la integración.');
+disp(['El valor de la integral de sin(x) de 0 a pi es: ', num2str(integralValue)]);
+
+x = linspace(a, b, 1000); % Puntos para graficar
+y = f(x);
+figure;
+plot(x, y, 'b', 'LineWidth', 1.5);
+title('Función a Integrar: sin(x)');
+xlabel('x');
+ylabel('f(x)');
+grid on;
+set(gca, 'FontSize', 10);
+set(gca, 'FontName', 'Arial');
+legend('sin(x)', 'Location', 'best');
+pause(1); % Pausa para mostrar el gráfico
+%%
+% *Regla del Trapecio de Newton-Cotes*
+f = @(x) sin(x); % Función a integrar
+a = 0; % Límite inferior
+b = pi; % Límite superior
+n = 50; % Número de subintervalos
+x = linspace(a, b, n+1); % Puntos donde se evaluará la función
+h = (b - a) / n; % Ancho de cada subintervalo
+integralValue = h * (sum(f(x)) - (f(a) + f(b)) / 2); % Fórmula del trapecio
+disp('Regla del Trapecio:');
+disp('La regla del trapecio divide el área bajo la curva en trapecios y lo estima como la suma de áreas de estos trapecios.');
+disp(['El valor de la integral de sin(x) de 0 a pi es: ', num2str(integralValue)]);
+
+figure;
+plot(x, f(x), 'r', 'LineWidth', 1.5);
+hold on;
+area(x, f(x), 'FaceColor', [1 0 0], 'FaceAlpha', 0.3);
+title('Regla del Trapecio para sin(x)');
+xlabel('x');
+ylabel('f(x)');
+grid on;
+set(gca, 'FontSize', 10);
+set(gca, 'FontName', 'Arial');
+legend('sin(x)', 'Área bajo la curva', 'Location', 'best');
+hold off;
+pause(1); % Pausa para mostrar el gráfico
+%%
+% *Regla de Simpson de Newton-Cotes*
+f = @(x) sin(x); % Función a integrar
+a = 0; % Límite inferior
+b = pi; % Límite superior
+n = 50; % Número de subintervalos (debe ser par)
+x = linspace(a, b, n+1); % Puntos donde se evaluará la función
+h = (b - a) / n; % Ancho de cada subintervalo
+integralValue = h/3 * (f(a) + 4*sum(f(x(2:2:end-1))) + 2*sum(f(x(3:2:end-2))) + f(b)); % Fórmula de Simpson
+disp('Regla de Simpson:');
+disp('La regla de Simpson utiliza polinomios de segundo orden para aproximar la función y calcular el área bajo la curva.');
+disp(['El valor de la integral de sin(x) de 0 a pi es: ', num2str(integralValue)]);
+
+figure;
+plot(x, f(x), 'g', 'LineWidth', 1.5);
+hold on;
+area(x, f(x), 'FaceColor', [0 1 0], 'FaceAlpha', 0.3);
+title('Regla de Simpson para sin(x)');
+xlabel('x');
+ylabel('f(x)');
+grid on;
+set(gca, 'FontSize', 10);
+set(gca, 'FontName', 'Arial');
+legend('sin(x)', 'Área bajo la curva', 'Location', 'best');
+hold off;
+pause(1); % Pausa para mostrar el gráfico
+%%
+% *Regla del Trapecio Compuesto*
+f = @(x) cos(x); % Función a integrar
+a = 0; % Límite inferior
+b = 2*pi; % Límite superior
+n = 100; % Número de subintervalos
+x = linspace(a, b, n+1); % Puntos donde se evaluará la función
+h = (b - a) / n; % Ancho de cada subintervalo
+integralValue = h/2 * (f(a) + 2*sum(f(x(2:end-1))) + f(b)); % Fórmula del trapecio compuesto
+disp('Trapecio Compuesto:');
+disp('El trapecio compuesto divide el intervalo en múltiples segmentos y aplica la regla del trapecio a cada uno.');
+disp(['El valor de la integral de cos(x) de 0 a 2*pi es: ', num2str(integralValue)]);
+
+figure;
+plot(x, f(x), 'm', 'LineWidth', 1.5);
+hold on;
+area(x, f(x), 'FaceColor', [1 0 1], 'FaceAlpha', 0.3);
+title('Trapecio Compuesto para cos(x)');
+xlabel('x');
+ylabel('f(x)');
+grid on;
+set(gca, 'FontSize', 10);
+set(gca, 'FontName', 'Arial');
+legend('cos(x)', 'Área bajo la curva', 'Location', 'best');
+hold off;
+pause(1); % Pausa para mostrar el gráfico
+%%
+% *Regla de Simpson Compuesta*
+f = @(x) cos(x); % Función a integrar
+a = 0; % Límite inferior
+b = 2*pi; % Límite superior
+n = 100; % Número de subintervalos (debe ser par)
+x = linspace(a, b, n+1); % Puntos donde se evaluará la función
+h = (b - a) / n; % Ancho de cada subintervalo
+integralValue = h/3 * (f(a) + 4*sum(f(x(2:2:end-1))) + 2*sum(f(x(3:2:end-2))) + f(b)); % Fórmula de Simpson compuesta
+disp('Simpson Compuesto:');
+disp('El método de Simpson compuesto utiliza la regla de Simpson en múltiples subintervalos para una mejor aproximación.');
+disp(['El valor de la integral de cos(x) de 0 a 2*pi es: ', num2str(integralValue)]);
+
+figure;
+plot(x, f(x), 'c', 'LineWidth', 1.5);
+hold on;
+area(x, f(x), 'FaceColor', [0 1 1], 'FaceAlpha', 0.3);
+title('Simpson Compuesto para cos(x)');
+xlabel('x');
+ylabel('f(x)');
+grid on;
+set(gca, 'FontSize', 10);
+set(gca, 'FontName', 'Arial');
+legend('cos(x)', 'Área bajo la curva', 'Location', 'best');
+hold off;
+pause(1); % Pausa para mostrar el gráfico
+%%
+% *Cuadratura Gaussiana*
+f = @(x) exp(-x.^2); % Función a integrar
+a = -1; % Límite inferior
+b = 1; % Límite superior
+integralValue = integral(f, a, b); % Cálculo de la integral
+disp('Cuadratura Gaussiana:');
+disp('La cuadratura gaussiana utiliza pesos y nodos específicos para una aproximación precisa de la integral.');
+disp(['El valor de la integral de exp(-x^2) de -1 a 1 es: ', num2str(integralValue)]);
+
+x = linspace(a, b, 1000); % Puntos para graficar
+y = f(x);
+figure;
+plot(x, y, 'k', 'LineWidth', 1.5);
+title('Función a Integrar: exp(-x^2)');
+xlabel('x');
+ylabel('f(x)');
+grid on;
+set(gca, 'FontSize', 10);
+set(gca, 'FontName', 'Arial');
+legend('exp(-x^2)', 'Location', 'best');
+pause(1); % Pausa para mostrar el gráfico
+%% Punto3
+%t = -5:0.01:5;
+c = zeros(size(t));
+
+% Definición de f(t) y p(t)
+f = zeros(size(t));
+f(t >= -2 & t <= 0) = -2 * t(t >= -2 & t <= 0);
+f(t >= 0 & t <= 2) = 2 * t(t >= 0 & t <= 2);
+
+p = zeros(size(t));
+p(t >= -3 & t <= 3) = 3 * t(t >= -3 & t <= 3);
+
+for i = 1:length(t)
+    for j = 1:length(t)
+        if (i + 1 - j) > 0 && (i + 1 - j) <= length(t)
+            c(i) = c(i) + f(j) * p(i + 1 - j);
+        end
+    end
+end
+
+plot(t, c);
+xlabel('t');
+ylabel('Convolución (f * p)');
+title('Convolución de las señales f(t) y p(t)');
+grid on;
+%
+%% Punto 4
+% Se realiza la correlación de las señales (c) con (d) del problema 3.1.1
+% de lathi, donde la señal de azul es c y la de rojo es b
+t1 = -2:2;
+x = zeros(size(t1));
+x(t1 >= -2 & t1 <= 0) = -2 * t1(t1 >= -2 & t1 <= 0);
+x(t1 >= 0 & t1 <= 2) = 2 * t1(t1 >= 0 & t1 <= 2);
+
+t2 = -3:1:3;
+p = 3 * t2;
+
+figure;
+stem(t1, x, 'r', 'filled', 'MarkerFaceColor', 'r');
+hold on;
+stem(t2, p, 'b', 'filled', 'MarkerFaceColor', 'b');
+xlabel('t');
+ylabel('Amplitud');
+title('Gráfica de x(t) y p(t)');
+grid on;
+legend('x(t)', 'p(t)');
+
+% Solucion
+t = -2:0.01:2;
+x = zeros(size(t));
+x(t >= -2 & t <= 0) = -2 * t(t >= -2 & t <= 0);
+x(t > 0 & t <= 2) = 2 * t(t > 0 & t <= 2);
+
+t = -3:0.01:3;
+p = zeros(size(t));
+p(t >= -3 & t <= 3) = 3 * t(t >= -3 & t <= 3);
+
+correlation = conv(x, flip(p)) * 0.01;
+
+figure;
+t_correlation = -5:0.01:5;
+t_correlation = t_correlation(1:length(correlation));
+plot(t_correlation, correlation);
+xlabel('t');
+ylabel('Correlación (x * p)');
+title('Correlación entre x(t) y p(t)');
+grid on;
+
+
+
+%% Punto 5
+% Se realiza la convolución de las señales (c) con (d) del problema 3.1.1
+% de lathi donde se muestra el codigo y la grafica
+
+
+% Solucion
+% 
+%%
+%
+% <include>Punto5.m</include>
+%
+%%
+t = -5:0.01:5; 
+x = zeros(size(t)); 
+p = zeros(size(t)); 
+
+x(t >= -2 & t <= 0) = -2 * t(t >= -2 & t <= 0);
+x(t >= 0 & t <= 2) = 2 * t(t >= 0 & t <= 2);
+
+p(t >= -3 & t <= 3) = 3 * t(t >= -3 & t <= 3);
+
+convolution = conv(x, p) * 0.01; 
+
+t_convolution = -5:0.01:5;
+convolution = convolution(1:length(t_convolution));
+
+figure;
+plot(t_convolution, convolution);
+xlabel('t');
+ylabel('Convolución (x * p)');
+title('Convolución de x(t) y p(t)');
+grid on;
+
+
+
+
+
+%%
+##### SOURCE END #####
+-->
+</body>
+</html>
